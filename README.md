@@ -1,25 +1,94 @@
-# BwAI-Nairobi-2025
+# Session 0 - Flutter for the Creative: Image to Story Generator with Gemini
 
-📚 This repository contains useful items from speakers of the 2025 Build With AI Nairobi Event, from presentations, workshops, and talks, or whatever else!  If there is some kind of resource you want to see, open an issue with the "resource request" label, or if you can submit a resource, go ahead an open a PR!
+- **Speakers**: @iamEtornam
 
-# Technical Codelabs and Workshops
+## About the session
 
-| Title | Speaker | Link |
-|-------|---------|------|
-|Flutter for the creative: Image to Story Generator with Gemini|[@iamEtornam](https://github.com/iamEtornam)|[Link](./sessions/00-StoryGenerator.md)|
+Building a Flutter app where users select about 5 images, and Gemini creates a
+story from them. This workshop focuses on using the Gemini multi-modal
+capabilities to analyze multiple images and then using its text generation
+capabilities to weave a narrative connecting the visual elements. The final
+result would be an engaging story produced entirely by AI based on the user's
+image selections.
 
+## Links
 
-## Contributing
+- [Slides](https://docs.google.com/presentation/d/1QN33cR7K8D9gvY_sYVmgjP3iJV5ZragtM68ye6xri3Y/edit?usp=sharing)
+- [Demo](https://youtu.be/sVrqqU0Dcd0)
 
-- Fork this repository
-- Create a Branch with your addition or change
-    1. Create a slide deck for your talk with the [provided slide deck template](https://docs.google.com/presentation/d/1xciiCPJDlLiSXpvSOnWrDK-atCnGux7EreZ4giJIbdU/edit?usp=sharing). Please stick to this as we aim to ensure uniform branding for the event. For any questions please post them in the dedicated Speakers WhatsApp Group or [email us](gdgnairobi1@gmail.com).
-    2. Open the [Sessions Folder](https://github.com/GDGNairobi/BwAI-Nairobi-2025/tree/main/sessions).
-    3. Place your presentation material in the corresponding folder (speaker name + presentation name). If you can’t find the right folder, create a new one with your name and presentation name.
-    4. Create a markdown file with all the details and materials about your session. See [an example here](https://github.com/GDGNairobi/BwAI-Nairobi-2025/blob/main/sessions/Bright%20Sunu%20%7C%20Flutter%20for%20the%20Creative%3A%20Image%20to%20Story%20Generator%20with%20Gemini/00-StoryGenerator.md)
-        - Feel free to add any jargon / technical term / key sentence for volunteers and event atendees to be aware of that wouldn’t otherwise be in your slides.
-    5. Confirm you’ve added your material by creating a new row on the Table in this README with the title of your talk, your name and a link to the markdown file you created.
-- Submit a pull request with this repo as the upstream main
-- Your PR will be reviewed by the speaker committee and merged.
+## Setup Process
 
-**Note**: If you are a speaker with slides who isn't familiar with Git, please let the team know by droping a message in the dedicated speaker group or [sending us an email](gdgnairobi1@gmail.com)so that we can work with you on getting your materials linked here!
+### Prerequisites
+
+1. Flutter SDK (3.7.2 or higher)
+2. Dart SDK (3.7.2 or higher)
+3. Firebase account
+4. Google Cloud account with Gemini API access
+
+### Installation Steps
+
+1. Clone the repository
+   ```bash
+   git clone [repository URL]
+   cd story_teller
+   ```
+
+2. Install dependencies
+   ```bash
+   flutter pub get
+   ```
+
+3. Firebase Setup
+   - Install the required command line tools
+     ```bash
+     dart pub global activate flutterfire_cli
+     ```
+   - Create a new Firebase project in the
+     [Firebase Console](https://console.firebase.google.com/)
+   - Enable Authentication with Google Sign-in
+   - Configure your Flutter app with Firebase:
+     ```bash
+     flutterfire configure
+     ```
+     This will guide you through selecting your Firebase project and platforms
+     (iOS, Android, web) and generate the necessary configuration files
+     (`google-services.json` and `GoogleService-Info.plist`)
+
+   - Initialize Firebase in your app by editing your `lib/main.dart` file:
+     ```dart
+     import 'package:firebase_core/firebase_core.dart';
+     import 'firebase_options.dart';
+
+     // Inside your main function
+     WidgetsFlutterBinding.ensureInitialized();
+     await Firebase.initializeApp(
+       options: DefaultFirebaseOptions.currentPlatform,
+     );
+     ```
+
+   - Add Firebase plugins to your app by running:
+     ```bash
+     flutter pub add firebase_core
+     flutter pub add firebase_auth
+     flutter pub add firebase_ai
+     ```
+
+4. Gemini API Setup
+   - Create a project in Firebase Console
+   - Go to (Google Cloud Platform)[https://console.cloud.google.com/welcome]
+   - Go to billing manager at the left panel and attach the billing account to the project you created on Firebase Console
+   - Return to Firebase console and Go to AI Logic
+   - Enable Gemini API
+   - Enable Vertex ai
+
+5. Run the application
+   ```bash
+   flutter run
+   ```
+
+### Project Structure
+
+- `lib/screens/`: Contains all app screens
+- `lib/services/`: API and Firebase services
+- `lib/widgets/`: Reusable UI components
+- `assets/`: Contains images and icons
